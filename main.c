@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
-
-#define NUM_STUDENTS 5 // macros used to define constants.
+#define NUM_STUDENTS 5
 #define NUM_TESTS 13
 #define NAME_MAX 11  // max 10 chars + null terminator
 #define LINE_MAX 200
 
 typedef struct {
-    char name[NAME_MAX]; // define for each student name string, score, and float average
+    char name[NAME_MAX];
     int scores[NUM_TESTS];
     float average;
 } Student;
 
-
-void capitalize(char* name) { // Capitalize first letter, lowercase rest
+// Capitalize first letter, lowercase rest
+void capitalize(char* name) {
     name[0] = toupper(name[0]);
     for (int i = 1; name[i]; i++) {
         name[i] = tolower(name[i]);
@@ -42,7 +42,7 @@ int parse_student_line(const char* line, Student* student) {
 
     // Use sscanf with %10s to avoid overflow on name
     // Then read 13 integers
-    count = sscanf(line, "%10s %d %d %d %d %d %d %d %d %d %d %d %d %d", // sscanf tries to read name and 13 scores from the input line
+    count = sscanf(line, "%10s %d %d %d %d %d %d %d %d %d %d %d %d %d",
                    name,
                    &scores[0], &scores[1], &scores[2], &scores[3], &scores[4],
                    &scores[5], &scores[6], &scores[7], &scores[8], &scores[9],
@@ -92,7 +92,7 @@ int main() {
                 line[len - 1] = '\0';
             }
 
-            if (parse_student_line(line, &students[i])) { // Parses one input line 
+            if (parse_student_line(line, &students[i])) {
                 // Calculate average
                 int sum = 0;
                 for (int j = 0; j < NUM_TESTS; j++) {
